@@ -30,23 +30,28 @@ fn feb_memoized(feb_query: i64,  memo : &mut HashMap<i64, i64>) -> i64{
     if memo.contains_key(&feb_query) {
 
         if let Some(value) = memo.get(&feb_query) {
-            return value;
+            return value.clone();
         }
     }
     if feb_query <= 2{
         return 1;
     }
 
-    let intermediate_result = feb_memoized(feb_query-1, &mut memo) + feb_memoized(feb_query-2, &mut memo);
+    let intermediate_result = feb_memoized(feb_query-1, memo) + feb_memoized(feb_query-2, memo);
     memo.insert(feb_query, intermediate_result);
     return intermediate_result;
 }
+
+
+
+
+
 
 fn main() {
     
     println!("Compute Nth Febonachi : ");
 
-    let mut str_content = String::new();
+    let mut str_content : String = String::new();
 
     io::stdin()
         .read_line(&mut str_content)
@@ -56,7 +61,9 @@ fn main() {
 
     let feb_query : i64 = str_content_trimmed.parse::<i64>().unwrap();
 
-    let nth_feb : i64 = feb(feb_query, false);
+    let compute_using_memoization : bool = true;
+
+    let nth_feb : i64 = feb(feb_query, compute_using_memoization);
 
     println!("{}th Febonachin Number is -> {}", feb_query, nth_feb);
 
