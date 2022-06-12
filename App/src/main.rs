@@ -27,4 +27,6 @@ fn main() {
 
     let nth_feb : i32 = feb(feb_query);
 
+    println!("{}th Febonachin Number is -> {}", feb_query, nth_feb);
+
 }
