@@ -5,7 +5,7 @@ fn feb(feb_query : i64, use_memoization : bool) -> i64{
     if use_memoization{
 
         let mut memo : HashMap<i64,i64> =  HashMap::new();
-        
+
         return feb_memoized(feb_query, &mut memo);
 
     }else{
@@ -28,7 +28,10 @@ fn feb_naive(feb_query : i64) -> i64{
 fn feb_memoized(feb_query: i64,  memo : &mut HashMap<i64, i64>) -> i64{
 
     if memo.contains_key(&feb_query) {
-        return memo.get(&feb_query).unwrap();
+
+        if let Some(value) = memo.get(&feb_query) {
+            return value;
+        }
     }
     if feb_query <= 2{
         return 1;
